@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <!-- TODO: Replace with your paper title and author names -->
+  <meta name="title"
+    content="MEDSAGE: Learning Structured Medical Visual Reasoning with a Structured Reasoning Scaffold - Yiru Huo; Haoran Yu; Yichen Shi; Hongyang Wang; Changjie Luo; Yao Chen; Jianzhou Feng">
+  <!-- TODO: Write a compelling 150-160 character description of your research -->
+  <meta name="description"
+    content="MEDSAGE brings structured localization–analysis–knowledge–decision reasoning plus SFT+RL to boost robustness, faithfulness, and accuracy across medical VQA benchmarks.">
+  <!-- TODO: Add 5-10 relevant keywords for your research area -->
+  <meta name="keywords"
+    content="medical vision-language models, Med-VQA, structured reasoning, reinforcement learning, self-correction, clinical AI, localization, knowledge grounding">
+  <!-- TODO: List all authors -->
+  <meta name="author" content="Yiru Huo, Haoran Yu, Yichen Shi, Hongyang Wang, Changjie Luo, Yao Chen, Jianzhou Feng">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <!-- TODO: Replace with your institution or lab name -->
+  <meta property="og:site_name" content="School of Information Science and Engineering, Yanshan University">
+  <!-- TODO: Same as paper title above -->
+  <meta property="og:title"
+    content="MEDSAGE: Learning Structured Medical Visual Reasoning with a Structured Reasoning Scaffold">
+  <!-- TODO: Same as description above -->
+  <meta property="og:description"
+    content="MEDSAGE brings structured localization–analysis–knowledge–decision reasoning plus SFT+RL to boost robustness, faithfulness, and accuracy across medical VQA benchmarks.">
+  <!-- TODO: Replace with your actual website URL -->
+  <meta property="og:url" content="https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE">
+  <!-- TODO: Create a 1200x630px preview image and update path -->
+  <meta property="og:image" content="https://YOUR_DOMAIN.com/static/images/method.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt"
+    content="MEDSAGE: Learning Structured Medical Visual Reasoning with a Structured Reasoning Scaffold - Research Preview">
+  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
+  <meta property="article:author"
+    content="Yiru Huo, Haoran Yu, Yichen Shi, Hongyang Wang, Changjie Luo, Yao Chen, Jianzhou Feng">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="medical vision-language models">
+  <meta property="article:tag" content="structured reasoning">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- TODO: Replace with your lab/institution Twitter handle -->
+  <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE">
+  <!-- TODO: Replace with first author's Twitter handle -->
+  <meta name="twitter:creator" content="@AUTHOR_TWITTER_HANDLE">
+  <!-- TODO: Same as paper title above -->
+  <meta name="twitter:title"
+    content="MEDSAGE: Learning Structured Medical Visual Reasoning with a Structured Reasoning Scaffold">
+  <!-- TODO: Same as description above -->
+  <meta name="twitter:description"
+    content="MEDSAGE brings structured localization–analysis–knowledge–decision reasoning plus SFT+RL to boost robustness, faithfulness, and accuracy across medical VQA benchmarks.">
+  <!-- TODO: Same as social preview image above -->
+  <meta name="twitter:image" content="https://YOUR_DOMAIN.com/static/images/method.png">
+  <meta name="twitter:image:alt"
+    content="MEDSAGE: Learning Structured Medical Visual Reasoning with a Structured Reasoning Scaffold - Research Preview">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title"
+    content="MEDSAGE: Learning Structured Medical Visual Reasoning with a Structured Reasoning Scaffold">
+  <meta name="citation_author" content="Huo, Yiru">
+  <meta name="citation_author" content="Yu, Haoran">
+  <meta name="citation_author" content="Shi, Yichen">
+  <meta name="citation_author" content="Wang, Hongyang">
+  <meta name="citation_author" content="Luo, Changjie">
+  <meta name="citation_author" content="Chen, Yao">
+  <meta name="citation_author" content="Feng, Jianzhou">
+  <meta name="citation_publication_date" content="2025">
+  <meta name="citation_conference_title" content="ACL 2026">
+  <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/medical_rl.pdf">
+
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+
+  <!-- TODO: Replace with your paper title and authors -->
+  <title>MEDSAGE: Learning Structured Medical Visual Reasoning with a Structured Reasoning Scaffold - Huo, Yu, Shi,
+    Wang, Luo, Chen, Feng | Academic Research</title>
+
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "MEDSAGE: Learning Structured Medical Visual Reasoning with a Structured Reasoning Scaffold",
+    "description": "MEDSAGE brings structured localization–analysis–knowledge–decision reasoning plus SFT+RL to boost robustness, faithfulness, and accuracy across medical VQA benchmarks.",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "Yiru Huo",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "School of Information Science and Engineering, Yanshan University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Haoran Yu",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "School of Information Science and Engineering, Yanshan University"
+        }
+      }
+    ],
+    "datePublished": "2026-01-08",
+    "publisher": {
+      "@type": "Organization",
+      "name": "ACL 2026"
+    },
+    "url": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE",
+    "image": "https://YOUR_DOMAIN.com/static/images/Method.png",
+    "keywords": [
+      "medical vision-language models",
+      "Med-VQA",
+      "structured reasoning",
+      "reinforcement learning",
+      "self-correction",
+      "clinical AI",
+      "localization",
+      "knowledge grounding"
+    ],
+    "abstract": "Reinforcement learning (RL) can improve interpretability in medical vision-language models (VLMs), but medical visual reasoning remains challenging without structured guidance. Existing supervised fine-tuning and reinforcement learning (SFT+RL) approaches often learn task-specific image-to-answer mappings, leading to misalignment between visual evidence and textual reasoning and resulting in shortcut reasoning. To address the above challenges, we propose MEDSAGE, a medical VLMs framework built upon high-quality structured reasoning sequences. MEDSAGE introduces a structured path enhancement strategy that formulates medical visual reasoning as a sequence of clinically meaningful stages—localization, visual analysis, knowledge matching, and final decision—thereby guiding models to explore reasonable reasoning paths. We construct two high-quality datasets, SAGE-sft20K and SAGE-rl10K, to support this training paradigm. Under this framework, SFT induces consistent reasoning structures across tasks, while RL further improves answer correctness and reasoning faithfulness by encouraging self-check guided correction of erroneous predictions. Experiments on five medical benchmark datasets show that MEDSAGE achieves competitive or improved performance while substantially enhancing the robustness, faithfulness, and generalization of medical visual reasoning.",
+    "citation": "BIBTEX_CITATION_HERE",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "mainEntity": {
+      "@type": "WebPage",
+      "@id": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE"
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "medical vision-language models"
+      },
+      {
+        "@type": "Thing",
+        "name": "structured reasoning"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Website/Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "School of Information Science and Engineering, Yanshan University",
+    "url": "https://YOUR_INSTITUTION_WEBSITE.com",
+    "logo": "https://YOUR_DOMAIN.com/static/images/favicon.ico",
+    "sameAs": [
+      "https://twitter.com/YOUR_TWITTER_HANDLE",
+      "https://github.com/YOUR_GITHUB_USERNAME"
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- More Works Dropdown -->
+  <div class="more-works-container">
+    <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab">
+      <i class="fas fa-flask"></i>
+      More Works
+      <i class="fas fa-chevron-down dropdown-arrow"></i>
+    </button>
+    <div class="more-works-dropdown" id="moreWorksDropdown">
+      <div class="dropdown-header">
+        <h4>More Works from Our Lab</h4>
+        <button class="close-btn" onclick="toggleMoreWorks()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="works-list">
+        <!-- TODO: Replace with your lab's related works -->
+        <!-- <a href="https://arxiv.org/abs/PAPER_ID_1" class="work-item" target="_blank"> -->
+        <!-- <div class="work-info"> -->
+        <!-- TODO: Replace with actual paper title -->
+        <!-- <h5>Paper Title 1</h5> -->
+        <!-- TODO: Replace with brief description -->
+        <!-- <p>Brief description of the work and its main contribution.</p> -->
+        <!-- TODO: Replace with venue and year -->
+        <!-- <span class="work-venue">Conference/Journal 2024</span> -->
+        <!-- </div> -->
+        <!-- <i class="fas fa-external-link-alt"></i> -->
+        <!-- </a> -->
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <!-- TODO: Replace with your paper title -->
+              <h1 class="title is-1 publication-title">MEDSAGE: Learning Structured Medical Visual Reasoning with a
+                Structured Reasoning Scaffold</h1>
+              <div class="is-size-5 publication-authors">
+                <!-- TODO: Replace with your paper authors and their personal links -->
+                <span class="author-block">
+                  <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Yiru Huo</a><sup>1,2,3</sup><sup>*</sup>,</span>
+                <span class="author-block">
+                  <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Haoran
+                    Yu</a><sup>1,2,3</sup><sup>*</sup>,</span>
+                <span class="author-block">
+                  <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Yichen Shi</a><sup>5,6</sup>,</span>
+                <span class="author-block">
+                  <a href="FOURTH AUTHOR PERSONAL LINK" target="_blank">Hongyang Wang</a><sup>4,6</sup>,</span>
+                <span class="author-block">
+                  <a href="FIFTH AUTHOR PERSONAL LINK" target="_blank">Changjie Luo</a><sup>1,2,3</sup>,</span>
+                <span class="author-block">
+                  <a href="SIXTH AUTHOR PERSONAL LINK" target="_blank">Yao Chen</a><sup>1,2,3</sup>,</span>
+                <span class="author-block">
+                  <a href="SEVENTH AUTHOR PERSONAL LINK" target="_blank">Jianzhou Feng</a><sup>1,2,3</sup><sup>†</sup>
+                </span>
+              </div>
+
+              <div class="is-size-5 publication-authors">
+                <!-- TODO: Replace with your institution and conference/journal info -->
+                <span class="author-block"><sup>1</sup>School of Information Science and Engineering, Yanshan
+                  University</span>
+                <span class="author-block"><sup>2</sup>The Key Laboratory for Software Engineering of Hebei
+                  Province</span>
+                <span class="author-block"><sup>3</sup>The Key Laboratory for Computer Virtual Technology and System
+                  Integration of Hebei Province</span>
+                <span class="author-block"><sup>4</sup>Shijiazhuang Tiedao University</span>
+                <span class="author-block"><sup>5</sup>Shanghai Jiao Tong University</span>
+                <span class="author-block"><sup>6</sup>Eastern Institute of Technology</span>
+                <br>
+                <span>ACL 2026</span>
+                <!-- TODO: Remove this line if no equal contribution -->
+                <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+              </div>
+
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <!-- TODO: Update with your arXiv paper ID -->
+                  <span class="link-block">
+                    <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Paper</span>
+                    </a>
+                  </span>
+
+                  <!-- TODO: Replace with your GitHub repository URL -->
+                  <span class="link-block">
+                    <a href="https://github.com/YOUR REPO HERE" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>Code(Coming soon)</span>
+                    </a>
+                  </span>
+
+                  <span class="link-block">
+                    <a href="https://huggingface.co/your-model" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon" style="vertical-align: middle; font-size: 20px;">🤗</span>
+                      <span>Datasets</span>
+                    </a>
+                  </span>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Teaser-->
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <!-- <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata">
+            <source src="static/videos/banner_video.mp4" type="video/mp4">
+          </video> -->
+          <img src="static/images/method.png" alt="Method Image" loading="lazy" />
+          <!-- TODO: Replace with your video description -->
+          <h2 class="subtitle has-text-centered">
+            Illustration of the proposed MEDSAGE framework. Stage 1 constructs structured medical reasoning data. Stage
+            2 performs reasoning-guided supervised fine-tuning to induce stage-wise reasoning behaviors. Stage 3 applies
+            Group Relative Policy Optimization with stage-aware self-check, routing reinforcement signals to self-check
+            tokens upon successful error correction.
+          </h2>
+        </div>
+      </div>
+    </section>
+    <!-- End teaser video -->
+
+    <!-- Paper abstract -->
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <!-- TODO: Replace with your paper abstract -->
+              <p>
+                Reinforcement learning (RL) can improve interpretability in medical vision-language models (VLMs), but
+                medical visual reasoning remains challenging without structured guidance. Existing supervised
+                fine-tuning and reinforcement learning (SFT+RL) approaches often learn task-specific image-to-answer
+                mappings, leading to misalignment between visual evidence and textual reasoning and resulting in
+                shortcut reasoning. To address the above challenges, we propose MEDSAGE, a medical VLMs framework built
+                upon high-quality structured reasoning sequences. MEDSAGE introduces a structured path enhancement
+                strategy that formulates medical visual reasoning as a sequence of clinically meaningful
+                stages—localization, visual analysis, knowledge matching, and final decision—thereby guiding models to
+                explore reasonable reasoning paths. We construct two high-quality datasets, SAGE-sft20K and SAGE-rl10K,
+                to support this training paradigm. Under this framework, SFT induces consistent reasoning structures
+                across tasks, while RL further improves answer correctness and reasoning faithfulness by encouraging
+                self-check guided correction of erroneous predictions. Experiments on five medical benchmark datasets
+                show that MEDSAGE achieves competitive or improved performance while substantially enhancing the
+                robustness, faithfulness, and generalization of medical visual reasoning.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End paper abstract -->
+
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full">
+            <h2 class="title is-3">Main Result</h2>
+            <div class="content has-text-justified">
+              <p>
+                <img src="static/images/main_result.png" alt="Main Result Image"
+                  class="blend-img-background center-image" style="max-width: 100%; height: auto;" loading="lazy">
+              </p>
+              <p style="font-family: Arial, sans-serif; line-height: 1.6; text-align: justify;">
+                <strong>Comparison across five medical benchmarks.</strong>
+                &Delta; indicates the performance gap (%) compared to our method.
+                <strong>Bold</strong> numbers indicate the best result in open-source VLMs and
+                <span style="color: gray;">gray</span> numbers indicate that the model has been trained on the
+                corresponding dataset.
+                MEDSAGE achieves the best overall performance among open-source models with an average accuracy of
+                69.8%, consistently outperforming both general-purpose baselines (e.g., Qwen2.5-VL) and existing
+                medical-specific VLMs.
+                Notably, it surpasses the reasoning-oriented MedVLM-R1 by a significant margin (&sim;19%) and
+                demonstrates superior robustness on radiology-focused datasets, such as achieving 79.8% on SLAKE and
+                58.3% on PMC-VQA.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full">
+            <h2 class="title is-3">Why is Structured Reasoning Crucial for Medical AI?</h2>
+            <div class="content has-text-justified">
+              <p>
+                <img src="static/images/compare_compress.png" alt="Compare Compress Image"
+                  class="blend-img-background center-image" style="max-width: 100%; height: auto;" loading="lazy">
+              </p>
+              <p>
+                <img src="static/images/comparison_curve.png" alt="Comparison Curve Image"
+                  class="blend-img-background center-image" style="max-width: 100%; height: auto;" loading="lazy">
+              </p>
+              <div>
+                <p>
+                  In the domain of medical Vision-Language Models (VLMs), structured reasoning is not merely an
+                  architectural preference but a fundamental requirement for safety and reliability. Without a
+                  structured scaffold, models often fail to capture the complexity of medical diagnosis. The superiority
+                  of structured reasoning over free-form approaches is driven by four critical factors:
+                </p>
+                <ul>
+                  <li>
+                    <strong>Mitigation of Shortcut Learning and Hallucinations:</strong>
+                    Standard supervised fine-tuning often leads models to learn task-specific shortcuts, mapping images
+                    directly to answers without genuine understanding. Similarly, unconstrained reinforcement learning
+                    (RL) generates free-form reasoning traces where visual evidence and logical steps become entangled,
+                    increasing the risk of hallucinations. Structured reasoning forces the model to derive answers
+                    through a logical sequence, preventing it from simply memorizing answer distributions.
+                  </li>
+                  <li>
+                    <strong>Enforcing Visual-Text Alignment and Grounding:</strong>
+                    A major limitation of unstructured reasoning is the misalignment between localized visual evidence
+                    and textual output. Free-form generation can collapse global context and specific visual cues into
+                    unconstrained text, weakening the link between what the model "sees" and what it "says". By
+                    enforcing a strict workflow—such as localization followed by visual analysis and knowledge
+                    matching—structured reasoning ensures that every conclusion is grounded in specific, verifiable
+                    visual findings.
+                  </li>
+                  <li>
+                    <strong>Alignment with Clinical Cognitive Workflows:</strong>
+                    Medical diagnosis is inherently structured, not random. Clinicians strictly follow a progressive
+                    process: identifying a Region of Interest (ROI), analyzing features, integrating domain knowledge,
+                    and forming a conclusion. Structured reasoning scaffolds compel the model to mimic this expert
+                    cognitive process. This alignment is critical for clinical reliability, as it transforms the model
+                    from a "black box" into a transparent diagnostic partner.
+                  </li>
+                  <li>
+                    <strong>Enabling Granular Self-Verification:</strong>
+                    In unstructured models, it is difficult to isolate where a reasoning error occurred. Structured
+                    reasoning decomposes the process into distinct stages (Localization, Visual Analysis, Knowledge,
+                    Conclusion), which allows for "stage-aware self-correction". This structure enables the model (and
+                    users) to verify the accuracy of intermediate steps—such as checking if the visual description
+                    matches the image before accepting the final diagnosis—thereby significantly enhancing robustness
+                    and reducing errors.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full">
+            <h2 class="title is-3">The Role of Stage-aware Self-Correction in Medical RL</h2>
+            <div class="content has-text-justified">
+              <p>
+                <img src="static/images/self_correcting_comparison.png" alt="Self-correcting Comparison Image"
+                  class="blend-img-background center-image" style="max-width: 100%; height: auto;" loading="lazy">
+              </p>
+              <div>
+                <p>The <strong>Stage-aware Self-Correction</strong> mechanism in MEDSAGE serves as a vital training-time
+                  scaffold designed to overcome the challenges of sparse rewards and "shortcut reasoning". By enforcing
+                  a reflection-based retry loop, it transforms the reinforcement learning (RL) process from simple
+                  outcome matching into a rigorous exploration of diagnostic logic.</p>
+
+                <hr>
+
+                <h4>1. Guided Exploration Workflow</h4>
+                <ul>
+                  <li><strong>Error Detection:</strong> When an initial reasoning path leads to an incorrect answer, the
+                    model is prompted to perform a structured self-check.</li>
+                  <li><strong>Reasoning Revision:</strong> As shown in the figure, the model identifies
+                    contradictions—such as "smooth margins" vs. the presence of a "pulmonary nodule"—and generates a
+                    revised path to correct the diagnosis.</li>
+                  <li><strong>Targeted Credit Assignment:</strong> Success rewards are applied exclusively to the
+                    self-check tokens using <strong>Group Relative Policy Optimization (GRPO)</strong>, incentivizing
+                    the model to internalize self-verification.</li>
+                </ul>
+
+                <h4>2. Key Training Advantages</h4>
+                <ul>
+                  <li><strong>Reduced Exploration Costs:</strong> The mechanism provides immediate feedback in the
+                    complex medical space, accelerating model convergence.</li>
+                  <li><strong>Reasoning Faithfulness:</strong> It ensures that the final decision is strictly grounded
+                    in localized visual evidence and matching medical knowledge.</li>
+                  <li><strong>Inference Efficiency:</strong> This scaffold operates only during training; at inference,
+                    the model generates accurate reasoning paths directly without additional computational overhead.
+                  </li>
+                </ul>
+
+                <p>Ultimately, this mechanism enables MEDSAGE to achieve superior robustness and interpretability by
+                  rewarding the <em>process</em> of correcting medical errors rather than just the final answer.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full">
+            <h2 class="title is-3">Dataset composition overview.</h2>
+            <div class="content has-text-justified">
+              <p>
+                <img src="static/images/data_distribution.png" alt="Dataset Composition Image"
+                  class="blend-img-background center-image" style="max-width: 100%; height: auto;" loading="lazy">
+              </p>
+              <p>
+                The MEDSAGE framework utilizes a comprehensive initial pool of 61,005 medical QA pairs sourced from
+                DeepLesion, Roboflow, and PubMedVision. This data features diverse imaging modalities, led by CT
+                (33.3%), X-Ray (22.5%), and Pathology (18.9%), and covers five key instruction types including Content
+                Generation (25.5%) and Complex Reasoning (16.3%). These samples are curated into the
+                <strong>SAGE-sft20K</strong> and <strong>SAGE-rl10K</strong> datasets, which enforce a structured
+                four-stage reasoning sequence—Localization, Visual Analysis, Knowledge Matching, and Conclusion—to
+                ensure diagnostic faithfulness and evidence-based grounding.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Image carousel -->
+    <section class="hero is-small">
+      <div class="hero-body">
+        <div class="container">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3">Examples of Reasoning Across Different Task Types and Medical Image Modalities</h2>
+            </div>
+          </div>
+          <div id="results-carousel" class="carousel results-carousel">
+            <div class="item">
+              <img src="static/images/examples/CT.png" alt="CT Image" loading="lazy" />
+              <h2 class="subtitle has-text-centered">
+                CT Modality
+              </h2>
+            </div>
+            <div class="item">
+              <img src="static/images/examples/MRI.png" alt="MRI Image" loading="lazy" />
+              <h2 class="subtitle has-text-centered">
+                MRI Modality
+              </h2>
+            </div>
+            <div class="item">
+              <img src="static/images/examples/OCT.png" alt="OCT Image" loading="lazy" />
+              <h2 class="subtitle has-text-centered">
+                OCT Modality
+              </h2>
+            </div>
+            <div class="item">
+              <img src="static/images/examples/Ultrasound.png" alt="Ultrasound Image" loading="lazy" />
+              <h2 class="subtitle has-text-centered">
+                Ultrasound Modality
+              </h2>
+            </div>
+            <div class="item">
+              <img src="static/images/examples/X-Ray.png" alt="X-ray Image" loading="lazy" />
+              <h2 class="subtitle has-text-centered">
+                X-ray Modality
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End image carousel -->
+
+
+
+
+    <!-- Youtube video -->
+    <!-- <section class="hero is-small is-light">
+      <div class="hero-body">
+        <div class="container">
+          <h2 class="title is-3">Video Presentation</h2>
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+
+              <div class="publication-video">
+                <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0"
+                  allow="autoplay; encrypted-media" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+    <!-- End youtube video -->
+
+    <!-- Paper poster -->
+    <section class="hero is-small">
+      <div class="hero-body">
+        <div class="container">
+          <h2 class="title">Preview</h2>
+
+          <iframe src="static/pdfs/medical_rl.pdf" width="100%" height="550">
+          </iframe>
+
+        </div>
+      </div>
+    </section>
+    <!--End paper poster -->
+
+
+
+    <!--BibTex citation -->
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <div class="bibtex-header">
+          <h2 class="title">BibTeX</h2>
+          <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+            <i class="fas fa-copy"></i>
+            <span class="copy-text">Copy</span>
+          </button>
+        </div>
+        <pre id="bibtex-code"><code>@article{YourPaperKey2024,
+  title={Your Paper Title Here},
+  author={First Author and Second Author and Third Author},
+  journal={Conference/Journal Name},
+  year={2024},
+  url={https://your-domain.com/your-project-page}
+}</code></pre>
+      </div>
+    </section>
+    <!--End BibTex citation -->
+
+
+    <footer class="footer">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content">
+
+              <p>
+                This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                  target="_blank">Academic Project Page Template</a> which was adopted from the <a
+                  href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+                You are free to borrow the source code of this website, we just ask that you link back to this page in
+                the footer. <br> This website is licensed under a <a rel="license"
+                  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                  Commons Attribution-ShareAlike 4.0 International License</a>.
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Statcounter tracking code -->
+
+    <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+</body>
+
+</html>
