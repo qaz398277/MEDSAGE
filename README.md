@@ -1,80 +1,36 @@
-# Academic Project Page Template
+# MEDSAGE: Structured Medical Visual Reasoning
 
-> **Update (September 2025)**: This template has been modernized with better design, SEO, and mobile support. For the original version, see the [original-version branch](https://github.com/eliahuhorwitz/Academic-project-page-template/tree/original-version).
+MEDSAGE formulates medical visual reasoning as a four-stage scaffold (Localization, Visual Analysis, Knowledge Matching, Conclusion) and trains medical VLMs with structured supervised fine-tuning plus self-check-guided RL. The goal is robust, faithful, and clinically aligned reasoning for Med-VQA.
 
-A clean, responsive template for academic project pages.
+## Key Contributions
+- Structured reasoning path: fixed LVKC stages to reduce visual-text misalignment and shortcut reasoning.
+- High-quality data: from 61k medical images we build SAGE-sft20K (full-stage reasoning traces) and SAGE-rl10K (balanced RL data); PubMedVision samples are pHash-deduped against eval sets to avoid leakage.
+- Self-check RL: GRPO with format reward and self-check correction; rewards apply only when retry fixes errors, encouraging reliable self-verification.
 
+## Method Overview
+![MEDSAGE](/static/images/method.png "MEDSAGE")
+- Trajectory construction: RoI perturbation and text-based localization with template-based knowledge matching to create multiple answer-consistent paths (Reasoning Path Augmentation).
+- Reasoning-guided SFT: LVKC-tagged full-sequence supervision teaches structured reasoning and answers.
+- RL refinement: Easy-R1 GRPO with format, answer-accuracy, and self-check rewards plus dynamic weight normalization to keep reward scale stable.
 
-Example project pages built using this template are:
-- https://horwitz.ai/probex
-- https://vision.huji.ac.il/probegen
-- https://horwitz.ai/mother
-- https://horwitz.ai/spectral_detuning
-- https://vision.huji.ac.il/ladeda
-- https://vision.huji.ac.il/dsire
-- https://horwitz.ai/podd
-- https://dreamix-video-editing.github.io
-- https://horwitz.ai/conffusion
-- https://horwitz.ai/3d_ads/
-- https://vision.huji.ac.il/ssrl_ad
-- https://vision.huji.ac.il/deepsim
+## Datasets
+- Sources: DeepLesion 26,851; Roboflow 15,057; PubMedVision 19,097 (total 61,005).
+- SAGE-sft20K: filtered four-stage trajectories for structured SFT.
+- SAGE-rl10K: 10k balanced samples for RL training.
 
+## Main Results
+- Five benchmarks: RAD 70.4 / SLAKE 79.8 / PathVQA 66.7 / PMC 58.3 / MMMU-Med 65.8; average 69.8 (best among open-source models, on par with or slightly above ViTAR).
+- GPT-score evaluations show LVKC improves localization, visual analysis, knowledge alignment, and reasoning quality.
+- Ablations: from baseline SFT to RPA+RL, overall accuracy rises 39.3 → 71.3, highlighting gains from structured data and self-check RL.
 
+## Training Setup
+- Hardware: 4×A100, bfloat16, DeepSpeed.
+- SFT: LLaMA-Factory, full-parameter (vision encoder frozen), 4 epochs, lr 1e-5, seq len 4096, batch 4, grad accum 16.
+- RL (R-GRPO): Easy-R1, 8 epochs, lr 1e-5, seq len 2048, max gen 1024, batch 2, grad accum 8, 6 candidates per sample.
 
-## Start using the template
-To start using the template click on `Use this Template`.
-
-The template uses html for controlling the content and css for controlling the style. 
-To edit the websites contents edit the `index.html` file. It contains different HTML "building blocks", use whichever ones you need and comment out the rest.  
-
-**IMPORTANT!** Make sure to replace the `favicon.ico` under `static/images/` with one of your own, otherwise your favicon is going to be a dreambooth image of me.
-
-## What's New
-
-- Modern, clean design with better mobile support
-- Improved SEO with proper meta tags and structured data
-- Performance improvements (lazy loading, optimized assets)
-- More Works dropdown
-- Copy button for BibTeX citations
-- Better accessibility
-
-## Components
-
-- Teaser video
-- Image carousel
-- YouTube video embedding
-- Video carousel
-- PDF poster viewer
-- BibTeX citation
-
-## Customization
-
-The HTML file has TODO comments showing what to replace:
-
-- Paper title, authors, institution, conference
-- Links (arXiv, GitHub, etc.)
-- Abstract and descriptions  
-- Videos, images, and PDFs
-- Related works in the dropdown
-- Meta tags for SEO and social sharing
-
-### Meta Tags
-The template includes meta tags for better search engine visibility and social media sharing. These appear in the `<head>` section and help with:
-- Google Scholar indexing
-- Social media previews (Twitter, Facebook, LinkedIn)
-- Search engine optimization
-
-Create a 1200x630px social preview image at `static/images/social_preview.png`.
-
-## Tips
-
-- Compress images with [TinyPNG](https://tinypng.com)
-- Use YouTube for large videos (>10MB)  
-- Replace the favicon in `static/images/`
-- Works with GitHub Pages
+## Repo Map
+- index.html and static/ for the project webpage.
+- medical_rl/acl_latex.tex is the paper source with full method and experiments.
 
 ## Acknowledgments
-Parts of this project page were adopted from the [Nerfies](https://nerfies.github.io/) page.
-
-## Website License
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+Built on public medical imaging data and auxiliary annotations generated with multimodal LLMs; thanks to the open-source community.
